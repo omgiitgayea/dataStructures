@@ -1,0 +1,12 @@
+#trooperList
+{
+    background-image: url("images/spaceMountain.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    min-height: 700px;
+}
+
+.trooperDivs
+{
+    display: inline;
+}
