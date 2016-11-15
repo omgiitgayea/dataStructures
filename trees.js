@@ -56,3 +56,5 @@ function find(item, node) {
     }
 }
 
+var dictionary = new TreeNode()
+
