@@ -35,6 +35,25 @@ function TreeNode(data) {
             return 0;
     };
 
+    this.insertNode = function (item)
+    {
+        var newNode = new TreeNode(item);
+        if (this.compare(item) === 0)
+        {
+            return null;
+        }
+        else if (this.compare(item) === 1)
+        {
+            this.setRightChild(newNode);
+            console.log("Right!");
+        }
+        else
+        {
+            this.setLeftChild(newNode);
+            console.log("Left!");
+        }
+    };
+
     this.print = function () {
 
     }
@@ -56,5 +75,6 @@ function find(item, node) {
     }
 }
 
-var dictionary = new TreeNode()
+var dictionary = new TreeNode("pasta");
+dictionary.insertNode("lobster");
 
