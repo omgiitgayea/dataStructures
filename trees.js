@@ -35,25 +35,6 @@ function TreeNode(data) {
             return 0;
     };
 
-    this.insertNode = function (item)
-    {
-        var newNode = new TreeNode(item);
-        if (this.compare(item) === 0)
-        {
-            return null;
-        }
-        else if (this.compare(item) === 1)
-        {
-            this.setRightChild(newNode);
-            console.log("Right!");
-        }
-        else
-        {
-            this.setLeftChild(newNode);
-            console.log("Left!");
-        }
-    };
-
     this.print = function () {
 
     }
@@ -75,6 +56,35 @@ function find(item, node) {
     }
 }
 
+function insertNode(item, node) {
+    if (node.compare(item) === 0) {
+        console.log("That's already in the tree");
+        return null;
+    }
+
+    if (node.compare(item) === 1) {
+        if (!node.getRightChild()) {
+            node.setRightChild(new TreeNode(item));
+            console.log("Right!");
+        }
+        else {
+            insertNode(item, node.getRightChild());
+        }
+    }
+    else {
+        if (!node.getLeftChild()) {
+            node.setLeftChild(new TreeNode(item));
+            console.log("Left!");
+        }
+        else {
+            insertNode(item, node.getLeftChild());
+        }
+    }
+}
+
 var dictionary = new TreeNode("pasta");
-dictionary.insertNode("lobster");
+insertNode("lobster", dictionary);
+insertNode("fish", dictionary);
+insertNode("pizza", dictionary);
+insertNode("macaroni", dictionary);
 
