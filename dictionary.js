@@ -14,7 +14,7 @@ function Dictionary ()
 
 function add(key, value)
 {
-    this.dataStore[key] = value;
+    this.dataStore[key] = new KidsNode(key, value);
 }
 
 function find(key)
@@ -33,9 +33,17 @@ function showAll()
     var output = "";
     for (var key in this.dataStore)
     {
-        output += "<div>" + key + ": ext. " + this.dataStore[key] + "</div>";
+        output = "<div>" + key + " wants " + this.dataStore[key].gift + " for Christmas</div>";
+        if(this.dataStore[key].good)
+        {
+            output += "<div> Santa has judged " + key + " to be " + this.dataStore[key].judgement + "! " + key + " will get " + this.dataStore[key].gift + " this Christmas!</div>";
+        }
+        else
+        {
+            output += "<div> Santa has judged " + key + " to be " + this.dataStore[key].judgement + "! " + key + " will get nothing this Christmas!</div>";
+        }
     }
-    $("#showlist").append(output);
+    $("#showlist").html(output);
 }
 
 function count()
@@ -78,8 +86,9 @@ function addPerson()
     {
         if(phonebook.find($("#name").val()) != undefined)
         {
-            var error = "<div>"+ $("#name").val() + " is already in the list</div>";
+            var error = "<div>"+ $("#name").val() + " is already in line</div>";
             $("#showerror").html(error);
+            $("#name").focus();
         }
         else {
             phonebook.add($("#name").val(), $("#extension").val());
@@ -87,6 +96,7 @@ function addPerson()
             $("#name").val("");
             $("#extension").val("");
             $("#showerror").html("");
+            $("#name").focus();
         }
     }
     else
@@ -95,3 +105,22 @@ function addPerson()
         $("#showerror").html(error);
     }
 }
+
+
+function showJudgements()
+{
+    if (!phonebook)
+    {
+        $("#showerror").html("Santa hasn't made any Judgements yet...");
+    }
+    else {
+        $("#showerror").html("");
+        $("#showJudgement").html("");
+        var output = "";
+        for (var key in phonebook.dataStore) {
+            output += "<div> Santa has judged " + key + " to be " + this.dataStore[key].judgement + "! " + key + " will get " + this.dataStore[key].gift + " this Christmas!</div>";
+        }
+        $("#showJudgement").html(output);
+    }
+}
+
